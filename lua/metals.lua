@@ -224,7 +224,12 @@ local new_file = function(language, directory_uri_opt, name_opt, file_type_opt)
 end
 
 M.new_scala_file = function(directory_uri_opt, name_opt, file_type_opt)
-  new_file("scala", directory_uri_opt, name_opt, file_type_opt)
+  local dir = directory_uri_opt
+  if (dir == nil) then
+    dir = vim.fn.input("Enter new file directory:", fn.expand("%:p:h"))
+  end
+
+  new_file("scala", dir, name_opt, file_type_opt)
 end
 
 M.new_java_file = function(directory_uri_opt, name_opt, file_type_opt)
